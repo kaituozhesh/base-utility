@@ -3,6 +3,7 @@ package com.ktz.base.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * @ClassName OptionalUtility
@@ -20,6 +21,18 @@ public class OptionalUtility {
      */
     public static boolean isEmpty(Object source) {
         return Optional.ofNullable(source).isPresent();
+    }
+
+    /**
+     * 获取对象数据，如果为空则创建一个空对象
+     *
+     * @param source   源对象
+     * @param supplier 如果为空返回空对象
+     * @param <T>      返回对象类型
+     * @return
+     */
+    public static <T> T get(T source, Supplier<T> supplier) {
+        return Optional.ofNullable(source).orElseGet(supplier);
     }
 
     /**
